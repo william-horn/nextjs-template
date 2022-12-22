@@ -2,13 +2,13 @@
 
 const enumCollectionPrototype = {
   _test() {
-    console.log('Enum Collection method');
+    return 'Enum Collection';
   }
 }
 
 const enumItemPrototype = {
   _test() {
-    console.log('Enum Item method');
+    return 'Enum Item';
   }
 }
 

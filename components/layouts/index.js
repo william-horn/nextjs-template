@@ -1,11 +1,14 @@
 import ExampleLayout from "./ExampleLayout";
 
-import Container from "../containers/Container";
+import Container from "../Container";
 import { useAppContext } from "../../providers/AppProvider";
 
 const LayoutController = ({ children }) => {
   const { currentPage } = useAppContext();
-  const layoutName = currentPage.layout ? (typeof currentPage.layout === 'string' && currentPage.layout || currentPage.layout.name) : null;
+  
+  const layoutName = currentPage.layout 
+    ? (typeof currentPage.layout === 'string' && currentPage.layout || currentPage.layout.name) 
+    : null;
 
   const getRenderedLayout = () => {
     switch (layoutName) {

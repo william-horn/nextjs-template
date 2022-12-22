@@ -11,7 +11,7 @@ const Document = () => {
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"/>
         <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Rubik+Spray+Paint&family=Rubik+Vinyl&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
-        <link rel="icon" href="/logo.webp"/>
+        <link rel="icon" href="/images/logo.webp"/>
       </Head>
       <body>
         <Main/>
