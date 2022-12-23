@@ -10,11 +10,11 @@ import Link from 'next/link';
 import Icons from '../public/icons';
 
 import Enum from '../enum';
-import useLocalStorage from '../hooks/useLocalStorage'
+import useLocalStorageState from '../hooks/useLocalStorageState'
 import IconText from '../components/typography/IconText';
 
 export default function Home() {
-  const [testLocalStorage, setTestLocalStorage] = useLocalStorage('test_key', 'initial_value');
+  const [testLocalStorage, setTestLocalStorage] = useLocalStorageState('test_key', 'initial_value');
   
   const updateLocalStorage = () => {
     console.log('updated value');
@@ -72,6 +72,13 @@ export default function Home() {
         </Container>
 
         <Title className="my-4 text-2xl">Example of search bar</Title>
+
+        <Searchbar 
+        className="w-[50%] bg-white" 
+        placeholder="click here to search!" 
+        leftIcon={Icons.SearchIcon} 
+        leftIconSize={24}
+        />
 
         <Searchbar 
         className="w-[50%] bg-white" 

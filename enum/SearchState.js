@@ -1,11 +1,11 @@
 
 import { EnumCollection, EnumItem } from './Enum';
 
-const Searchbar = new EnumCollection({
+const SearchState = new EnumCollection({
   Idle: new EnumItem({ value: 'idle' }),
   Focused: new EnumItem({ value: 'focused' }),
   Blurred: new EnumItem({ value: 'blurred' }),
 });
 
-export default Searchbar;
+export default SearchState;
 

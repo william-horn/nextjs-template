@@ -1,9 +1,10 @@
 
 import { useState, useEffect } from 'react';
+import { isClient } from '../lib/helpers/machine';
 
-const useLocalStorage = (key, initialValue) => {
+const useLocalStorageState = (key, initialValue) => {
   const [_state, _setState] = useState(() => {
-    if (typeof window !== 'undefined') {
+    if (isClient()) {
       const saved = JSON.parse(localStorage.getItem(key));
       if (saved) return saved;
     }
@@ -19,4 +20,4 @@ const useLocalStorage = (key, initialValue) => {
   return [_state, _setState];
 }
 
-export default useLocalStorage;
+export default useLocalStorageState;

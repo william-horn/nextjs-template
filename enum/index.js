@@ -3,12 +3,12 @@
 import StorageKeys from './StorageKeys';
 import LayoutNames from './LayoutNames';
 import Themes from './Themes';
-import Searchbar from './Searchbar';
+import SearchState from './SearchState';
 
 export default {
   StorageKeys,
   LayoutNames,
   Themes,
-  Searchbar
+  SearchState
 }
 
