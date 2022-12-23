@@ -15,7 +15,8 @@
     "next": "13.0.7",
     "pseudo-events": "^1.0.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

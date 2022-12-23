@@ -6,7 +6,9 @@ import IconImage from "./IconImage";
 import Button from "./buttons/Button";
 // import { useAppContext } from "../providers/AppProvider";
 import Enum from '../enum';
+import removeExtraWhitespace from "../lib/helpers/removeExtraWhitespace";
 import useLocalStorageRequest from "../hooks/useLocalStorageRequest";
+import { v4 as uuidv4 } from 'uuid';
 // import useLocalStorageState from '../hooks/useLocalStorageState';
 import { useState, useRef, useEffect } from 'react';
 
@@ -14,6 +16,7 @@ const SearchBar = ({
   className="", 
   remove, 
   placeholder, 
+  onSearch=search => console.log('searched for: ', search),
   historyDomain=Enum.StorageKeys.SearchHistoryDomain.Primary.value,
   historySize=3,
   leftIcon,
@@ -38,7 +41,7 @@ const SearchBar = ({
   }
 
   // When search bar is unfocused
-  const onSearchOnfocus = (event) => {
+  const onSearchUnfocus = (event) => {
     if (!event.path.some(el => el === searchBarRef.current)) {
       unfocusSearch();
     }
@@ -46,10 +49,10 @@ const SearchBar = ({
 
   // Window events for detecting when using is unfocusing the search bar
   useEffect(() => {
-    window.addEventListener('mousedown', onSearchOnfocus);
+    window.addEventListener('mousedown', onSearchUnfocus);
     window.addEventListener('blur', unfocusSearch);
     return () => {
-      window.removeEventListener('mousedown', onSearchOnfocus);
+      window.removeEventListener('mousedown', onSearchUnfocus);
       window.removeEventListener('blur', unfocusSearch);
     }
   }, []);
@@ -59,29 +62,55 @@ const SearchBar = ({
     setSearchState(Enum.SearchState.Focused.value);
   }
 
+  const filterSearch = (searchQuery) => {
+    unfocusSearch();
+    const filteredQuery = removeExtraWhitespace(searchQuery);
+
+    // todo: handle duplicate search results in the local history
+    updateSearchHistory(prev => {
+      const old = prev[historyDomain] || [];
+      let history = [searchFieldRef.current.value, ...old]; 
+
+      if (history.length > historySize) history = history.slice(0, historySize);
+      return {...prev, [historyDomain]: history };
+    });
+    
+    onSearch(filteredQuery);
+  }
+
+  const onSearchResultQuery = (result) => {
+    searchFieldRef.current.value = result;
+    filterSearch(result);
+  }
+
   // When a search is submitted in the search bar
   const onEnter = (event) => {
     if (event.key === Enum.KeyNames.Enter.value) {
-      unfocusSearch();
-      
-      updateSearchHistory(prev => {
-        const old = prev[historyDomain] || [];
-        let history = [searchFieldRef.current.value, ...old]; 
-
-        if (history.length > historySize) history = history.slice(0, historySize);
-        return {...prev, [historyDomain]: history };
-      });
+      filterSearch(searchFieldRef.current.value);
     }
   }
+
+  const renderSearchResult = (result) => (
+    <Button 
+    key={uuidv4()}
+    onClick={() => onSearchResultQuery(result)}
+    className="w-full p-1 text-left text-black transition-colors duration-200 rounded cursor-default hover:bg-gray-200" 
+    remove="all">
+      {result}
+    </Button>
+  );
 
   // The drop-down search results when the search bar is focused
   const renderSearchResults = () => {
     if (searchState === Enum.SearchState.Focused.value) {
       return (
         <Container className="absolute w-full bg-white rounded-b-md top-full z-[1000]">
-          <Container className="px-2 py-1">
-            <Button onClick={() => console.log('YES')}>Hello!</Button>
-            <Text className="text-black">Hello world</Text>
+          <Container className="px-3 py-2 overflow-y-auto max-h-[200px]">
+            {
+              getSearchHistory(historyDomain).map(result => {
+                return renderSearchResult(result);
+              })
+            }
           </Container>
         </Container>
       );

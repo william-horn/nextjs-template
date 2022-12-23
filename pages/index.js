@@ -20,6 +20,10 @@ export default function Home() {
     console.log('updated value');
     setTestLocalStorage('updated_value');
   }
+
+  const onSearch = (searchQuery) => {
+    console.log('The user searched for: ', searchQuery);
+  }
   
   return (
     <Container className="bg-blue-500 page h-[500vh]">
@@ -74,7 +78,7 @@ export default function Home() {
         <Title className="my-4 text-2xl">Example of search bar</Title>
 
         <Searchbar 
-        className="w-[50%] bg-white" 
+        className="w-[50%] bg-white mb-10" 
         placeholder="click here to search!"
         leftIcon={Icons.SearchIcon} 
         leftIconSize={24}
@@ -95,7 +99,6 @@ export default function Home() {
           <SearchBar.Placeholder>Please search here</SearchBar.Placeholder>
         </SearchBar>
         */}
-
 
       </Container>
       

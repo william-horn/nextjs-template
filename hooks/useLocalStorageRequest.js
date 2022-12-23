@@ -22,8 +22,12 @@ const useLocalStorageRequest = (key, value) => {
     dataRef.current = updated;
   }
 
-  const getter = () => {
-    return dataRef.current;
+  const getter = (domain) => {
+    if (domain) {
+      return dataRef.current[domain] || [];
+    } else {
+      return dataRef.current;
+    }
   }
 
   return [getter, updater];
