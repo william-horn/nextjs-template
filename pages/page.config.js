@@ -45,6 +45,12 @@ const pageConfig = {
       name: Enum.LayoutNames.ExampleLayout.value,
     }
   }),
+
+  _404: new Page({
+    title: "Not Found",
+    id: "not_found",
+    url: "/_error"
+  })
 }
 
 export const findPageByUrl = url => {
@@ -54,6 +60,9 @@ export const findPageByUrl = url => {
       return page;
     }
   }
+
+  console.log(`INTERNAL ERROR: No such page exists for url: '${url}'`);
+  return pageConfig._404;
 }
 
 export default pageConfig;

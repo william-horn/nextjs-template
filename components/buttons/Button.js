@@ -21,15 +21,10 @@ const Button = ({
     base: "relative flex items-center px-2 m-2 bg-black transition-all rounded filter hover:invert custom-button min-w-fit",
     extend: className,
     remove
-  })
+  });
 
-  const renderIcon = (src, size) => {
-    return (
-      src
-        ? <IconImage className="filter invert" size={size} src={src}/>
-        : <></>
-    )
-  }
+  const renderIcon = (src, size) => 
+    <IconImage className="filter invert" size={size} src={src}/>;
 
   const renderInnerButton = () => <>
     {renderIcon(leftIcon, leftIconSize)}
@@ -40,7 +35,7 @@ const Button = ({
     </span>
 
     {renderIcon(rightIcon, rightIconSize)}
-  </>
+  </>;
 
   return (
     url

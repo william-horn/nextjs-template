@@ -5,6 +5,8 @@ import Container from "./Container";
 import buildClassName from "../lib/helpers/buildClassName";
 
 const IconImage = ({ className="", remove, src, size="48px" }) => {
+  if (!src) return <></>;
+  
   return (
     <Container
     className={buildClassName({
@@ -12,7 +14,7 @@ const IconImage = ({ className="", remove, src, size="48px" }) => {
       extend: className,
       remove
     })}
-    style={{width: size, height: size}}>
+    style={{minWidth: size, height: size}}>
       <Image src={src} alt="icon" sizes={size} fill />
     </Container>
   );

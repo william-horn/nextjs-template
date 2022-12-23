@@ -28,6 +28,10 @@ a {
   width: fit-content;
 }
 
+input {
+  all: unset;
+}
+
 .wireframe * {
   outline: 1px solid red !important;
 }

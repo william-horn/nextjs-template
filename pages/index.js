@@ -4,6 +4,7 @@ import Button from '../components/buttons/Button';
 import Container from '../components/Container';
 import Text from '../components/typography/Text';
 import Title from '../components/typography/Title';
+import Searchbar from '../components/Searchbar';
 import IconImage from '../components/IconImage';
 import Link from 'next/link';
 import Icons from '../public/icons';
@@ -71,6 +72,21 @@ export default function Home() {
         </Container>
 
         <Title className="my-4 text-2xl">Example of search bar</Title>
+
+        <Searchbar 
+        className="w-[50%] bg-white" 
+        placeholder="click here to search!" 
+        leftIcon={Icons.SearchIcon} 
+        leftIconSize={24}
+        />
+
+        {/* 
+        <SearchBar className="w-[50%]" historySize={10}>
+          <SearchBar.Icon src={Icons.SearchIcon} size="36"/>
+          <SearchBar.Placeholder>Please search here</SearchBar.Placeholder>
+        </SearchBar>
+        */}
+
 
       </Container>
       
