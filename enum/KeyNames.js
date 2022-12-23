@@ -1,8 +1,8 @@
 
 import { EnumCollection, EnumItem } from './Enum';
 
-const LayoutNames = new EnumCollection({
+const KeyNames = new EnumCollection({
   Enter: new EnumItem({ value: 'Enter' }),
 })
 
-export default LayoutNames;
+export default KeyNames;

@@ -75,7 +75,7 @@ export default function Home() {
 
         <Searchbar 
         className="w-[50%] bg-white" 
-        placeholder="click here to search!" 
+        placeholder="click here to search!"
         leftIcon={Icons.SearchIcon} 
         leftIconSize={24}
         />
@@ -83,6 +83,8 @@ export default function Home() {
         <Searchbar 
         className="w-[50%] bg-white" 
         placeholder="click here to search!" 
+        historySize={5}
+        historyDomain={Enum.StorageKeys.SearchHistoryDomain.Secondary.value}
         leftIcon={Icons.SearchIcon} 
         leftIconSize={24}
         />

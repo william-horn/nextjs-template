@@ -10,7 +10,12 @@ const StorageKeys = new EnumCollection({
   SearchHistory: new EnumItem({
     value: 'search-history',
     info: 'locally saved search queries'
-  })
+  }),
+
+  SearchHistoryDomain: new EnumCollection({
+    Primary: new EnumItem({ value: 'primary' }),
+    Secondary: new EnumItem({ value: 'secondary' }),
+  }),
 }, {
   valuePrefix: 'app-name:'
 })

@@ -27,7 +27,6 @@ export default function App({ Component, pageProps }) {
   const currentUrl = router.pathname;
   const currentPage = findPageByUrl(currentUrl);
   const lastPageRef = useRef(null);
-  const mouse = useMouse();
 
   useEffect(() => {
     lastPageRef.current = currentPage;
@@ -39,7 +38,6 @@ export default function App({ Component, pageProps }) {
       currentPage,
       currentUrl,
       lastPage: lastPageRef.current,
-      mouse
     }}>
       <Container className="relative max-h-screen min-h-screen overflow-y-auto bg-gray-600 max-w-screen min-w-screen">
         <LayoutController>

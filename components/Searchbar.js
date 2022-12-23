@@ -4,7 +4,7 @@ import Text from "./typography/Text";
 import buildClassName from "../lib/helpers/buildClassName";
 import IconImage from "./IconImage";
 import Button from "./buttons/Button";
-import { useAppContext } from "../providers/AppProvider";
+// import { useAppContext } from "../providers/AppProvider";
 import Enum from '../enum';
 import useLocalStorageRequest from "../hooks/useLocalStorageRequest";
 // import useLocalStorageState from '../hooks/useLocalStorageState';
@@ -14,17 +14,16 @@ const SearchBar = ({
   className="", 
   remove, 
   placeholder, 
+  historyDomain=Enum.StorageKeys.SearchHistoryDomain.Primary.value,
   historySize=3,
   leftIcon,
   rightIcon,
   leftIconSize="24px",
   rightIconSize="24px"
 }) => {
-  const { mouse } = useAppContext();
-
   // Get search history getters/setters for local storage
   const [getSearchHistory, updateSearchHistory] = useLocalStorageRequest(
-    Enum.StorageKeys.SearchHistory.value, []
+    Enum.StorageKeys.SearchHistory.value, { [historyDomain]: [] }
   );
 
   // Create search state for when the search bar is interacted with
@@ -32,35 +31,45 @@ const SearchBar = ({
   const searchBarRef = useRef(null);
   const searchFieldRef = useRef(null);
 
-  const searchUnfocus = (_, event) => {
+  // Force unfocus on search bar
+  const unfocusSearch = () => {
+    searchFieldRef.current.blur();
+    setSearchState(Enum.SearchState.Idle.value);
+  }
+
+  // When search bar is unfocused
+  const onSearchOnfocus = (event) => {
     if (!event.path.some(el => el === searchBarRef.current)) {
-      setSearchState(Enum.SearchState.Idle.value);
+      unfocusSearch();
     }
   }
 
+  // Window events for detecting when using is unfocusing the search bar
   useEffect(() => {
-    mouse.down.connect({ handler: searchUnfocus });
-
+    window.addEventListener('mousedown', onSearchOnfocus);
+    window.addEventListener('blur', unfocusSearch);
     return () => {
-      mouse.down.disconnect({ handler: searchUnfocus });
+      window.removeEventListener('mousedown', onSearchOnfocus);
+      window.removeEventListener('blur', unfocusSearch);
     }
   }, []);
 
   // When the search bar is focused
-  const searchFocus = () => {
+  const onSearchFocus = () => {
     setSearchState(Enum.SearchState.Focused.value);
   }
 
   // When a search is submitted in the search bar
   const onEnter = (event) => {
     if (event.key === Enum.KeyNames.Enter.value) {
-      searchFieldRef.current.blur();
+      unfocusSearch();
       
       updateSearchHistory(prev => {
-        const history = [searchFieldRef.current.value, ...prev]; 
-        if (history.length > historySize) history.pop();
-  
-        return history;
+        const old = prev[historyDomain] || [];
+        let history = [searchFieldRef.current.value, ...old]; 
+
+        if (history.length > historySize) history = history.slice(0, historySize);
+        return {...prev, [historyDomain]: history };
       });
     }
   }
@@ -107,7 +116,7 @@ const SearchBar = ({
         <input 
         ref={searchFieldRef} 
         onKeyUp={onEnter}
-        onFocus={searchFocus} 
+        onFocus={onSearchFocus} 
         className="w-full h-full mx-2" 
         type="text" 
         placeholder={placeholder} 
