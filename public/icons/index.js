@@ -19,6 +19,7 @@ import TrashIcon from '../../public/icons/trash.png';
 import GemIcon from '../../public/icons/gem.png';
 import UploadIcon from '../../public/icons/upload.png';
 import SettingsIcon from '../../public/icons/settings.png';
+import DamageIcon from './damage-icon.png';
 
 const Icons = {
   RefreshIcon,
@@ -40,7 +41,8 @@ const Icons = {
   TrashIcon,
   GemIcon,
   UploadIcon,
-  SettingsIcon
+  SettingsIcon,
+  DamageIcon
 };
 
 export default Icons;

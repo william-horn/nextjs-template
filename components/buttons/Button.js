@@ -17,6 +17,7 @@ const Button = ({
   url,
 }) => {
 
+  // todo: maybe don't give buttons a hover effect by default?
   const buttonClass = buildClassName({
     base: "relative flex items-center px-2 m-2 bg-black transition-all rounded filter hover:invert custom-button min-w-fit",
     extend: className,

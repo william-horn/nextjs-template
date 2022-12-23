@@ -2,6 +2,7 @@
 import Container from "./Container";
 import Text from "./typography/Text";
 import buildClassName from "../lib/helpers/buildClassName";
+import stringIsEmpty from '../lib/helpers/stringIsEmpty';
 import IconImage from "./IconImage";
 import Button from "./buttons/Button";
 // import { useAppContext } from "../providers/AppProvider";
@@ -66,18 +67,37 @@ const SearchBar = ({
     unfocusSearch();
     const filteredQuery = removeExtraWhitespace(searchQuery);
 
-    // todo: handle duplicate search results in the local history
-    updateSearchHistory(prev => {
-      const old = prev[historyDomain] || [];
-      let history = [searchFieldRef.current.value, ...old]; 
+    // Check for whitespace-exclusive searches
+    if (stringIsEmpty(filteredQuery)) {
+      return;
+    }
 
-      if (history.length > historySize) history = history.slice(0, historySize);
-      return {...prev, [historyDomain]: history };
+    // Update search history
+    updateSearchHistory(prev => {
+      let finalResults = prev[historyDomain] || [];
+      const duplicateIndex = finalResults.indexOf(filteredQuery);
+
+      // Check for duplicate searches. If duplicate is found, just re-order the search results
+      if (duplicateIndex > -1) {
+        finalResults.splice(duplicateIndex, 1);
+        finalResults.unshift(filteredQuery);
+
+      } else {
+        finalResults = [filteredQuery, ...finalResults]; 
+      }
+
+      // Clip search results to history size limit
+      if (finalResults.length > historySize) {
+        finalResults = finalResults.slice(0, historySize);
+      }
+      
+      return {...prev, [historyDomain]: finalResults };
     });
     
     onSearch(filteredQuery);
   }
 
+  // When a search is invoked through the search result drop-down menu
   const onSearchResultQuery = (result) => {
     searchFieldRef.current.value = result;
     filterSearch(result);
@@ -94,20 +114,22 @@ const SearchBar = ({
     <Button 
     key={uuidv4()}
     onClick={() => onSearchResultQuery(result)}
-    className="w-full p-1 text-left text-black transition-colors duration-200 rounded cursor-default hover:bg-gray-200" 
-    remove="all">
+    className="w-full text-left text-[#6900ff] font-medium transition-colors duration-200 rounded cursor-default hover:bg-gray-200 items-center" 
+    remove="hover:invert px-2 m-2 filter bg-black transition-all filter">
       {result}
     </Button>
   );
 
   // The drop-down search results when the search bar is focused
   const renderSearchResults = () => {
-    if (searchState === Enum.SearchState.Focused.value) {
+    const historyLogs = getSearchHistory(historyDomain);
+    
+    if (searchState === Enum.SearchState.Focused.value && historyLogs.length > 0) {
       return (
         <Container className="absolute w-full bg-white rounded-b-md top-full z-[1000]">
           <Container className="px-3 py-2 overflow-y-auto max-h-[200px]">
             {
-              getSearchHistory(historyDomain).map(result => {
+              historyLogs.map(result => {
                 return renderSearchResult(result);
               })
             }

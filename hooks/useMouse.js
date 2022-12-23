@@ -1,4 +1,5 @@
 
+// !This hook currently serves no purpose anymore. Maybe some day it will.
 
 import { useEffect } from "react";
 import { Event } from 'pseudo-events';

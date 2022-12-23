@@ -34,8 +34,8 @@ export default function Home() {
           <IconText>
             <Text>Hello</Text> <IconImage src={Icons.GemIcon} size="26px"/> <Text>world</Text> 
             <Text>Hello</Text> <IconImage src={Icons.FavoriteIcon} size="26px"/> <Text>world</Text>
-            <Text>Hello</Text> <IconImage src={Icons.MenuIcon} size="26px"/> <Text>world</Text>
-            <Text>Hello</Text> <IconImage src={Icons.FriendsPageIcon} size="26px"/> <Text>world</Text>
+            <Text>700</Text> <IconImage src={Icons.DamageIcon} size="26px"/> <Text>world</Text>
+            <Text>500</Text> <IconImage src={Icons.FriendsPageIcon} size="26px"/> <Text>world</Text>
           </IconText>
         </Container>
 
@@ -57,6 +57,8 @@ export default function Home() {
         </Button>
 
         <Button>Just an ordinary button</Button>
+
+        <Button>Just an ordinary button but lets see how responsive it is when crunched down</Button>
 
 
         <Title className="my-4 text-2xl">Sticky elements example</Title>
@@ -90,6 +92,7 @@ export default function Home() {
         historySize={5}
         historyDomain={Enum.StorageKeys.SearchHistoryDomain.Secondary.value}
         leftIcon={Icons.SearchIcon} 
+        rightIcon={Icons.DamageIcon} 
         leftIconSize={24}
         />
 

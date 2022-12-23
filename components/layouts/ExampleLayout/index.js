@@ -1,7 +1,7 @@
 
 import Container from '../../Container';
 import React from 'react';
-import Head from 'next/head';
+import Text from '../../typography/Text';
 import { useAppContext } from '../../../providers/AppProvider';
 
 const ExampleLayout = ({ children }) => {
@@ -9,7 +9,7 @@ const ExampleLayout = ({ children }) => {
 
   return (
     <Container className="example-layout">
-      <p>Layout!</p>
+      <Text>Layout!</Text>
       {children}
     </Container>
   );

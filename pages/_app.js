@@ -7,7 +7,6 @@ import Container from '../components/Container';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import { findPageByUrl } from './page.config';
-import useMouse from '../hooks/useMouse';
 
 if (typeof window !== 'undefined') {
   const allEl = window.document.querySelector("body");
@@ -39,7 +38,7 @@ export default function App({ Component, pageProps }) {
       currentUrl,
       lastPage: lastPageRef.current,
     }}>
-      <Container className="relative max-h-screen min-h-screen overflow-y-auto bg-gray-600 max-w-screen min-w-screen">
+      <Container className="relative max-h-screen min-h-screen overflow-y-auto max-w-screen min-w-screen">
         <LayoutController>
           <Component {...pageProps} />
         </LayoutController>

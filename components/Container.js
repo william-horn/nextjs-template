@@ -9,16 +9,12 @@ const Container = React.forwardRef(({
   children,
   onClick,
   style,
-  onMouseDown,
-  onMouseUp
 }, ref) => {
   return (
     <div 
     {...{
       onClick, 
       style,
-      onMouseDown,
-      onMouseUp,
     }}
     ref={ref} 
     className={buildClassName({
