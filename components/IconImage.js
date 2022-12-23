@@ -8,7 +8,7 @@ const IconImage = ({ className="", remove, src, size="48px" }) => {
   return (
     <Container
     className={buildClassName({
-      base: "icon-container relative",
+      base: "icon-container relative inline-block",
       extend: className,
       remove
     })}

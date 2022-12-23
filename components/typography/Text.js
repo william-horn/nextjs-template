@@ -1,7 +1,15 @@
 
-const Text = ({ children }) => {
+import buildClassName from "../../lib/helpers/buildClassName";
+
+const Text = ({ className="", remove, children }) => {
   return (
-    <p>{children}</p>
+    <p
+    className={buildClassName({
+      extend: className,
+      remove})
+    }>
+        {children}
+    </p>
   );
 };
 

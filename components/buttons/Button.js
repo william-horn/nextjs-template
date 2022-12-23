@@ -17,6 +17,12 @@ const Button = ({
   url,
 }) => {
 
+  const buttonClass = buildClassName({
+    base: "relative flex items-center px-2 m-2 bg-black transition-all rounded filter hover:invert custom-button min-w-fit",
+    extend: className,
+    remove
+  })
+
   const renderIcon = (src, size) => {
     return (
       src
@@ -25,35 +31,49 @@ const Button = ({
     )
   }
 
-  const renderButton = () => {
-    return (
-      <button
-      className={buildClassName({
-        base: "relative flex items-center px-2 mx-2 my-2 text-white transition-all rounded filter hover:invert custom-button min-w-fit",
-        extend: className,
-        remove
-      })}
-      onClick={onClick}>
-        {renderIcon(leftIcon, leftIconSize)}
+  const renderInnerButton = () => <>
+    {renderIcon(leftIcon, leftIconSize)}
 
-        <span 
-        className="flex-auto p-2 text-left text-white rounded text-md">
-          {children}
-        </span>
-        
-        {renderIcon(rightIcon, rightIconSize)}
-      </button>
-    );
-  }
+    <span 
+    className="flex-auto p-2 text-left rounded text-md">
+      {children}
+    </span>
+
+    {renderIcon(rightIcon, rightIconSize)}
+  </>
 
   return (
-    url 
-      ? <Link href={url}>
-          {renderButton()}
+    url
+      ? <Link
+        className={buttonClass}
+        href={url}>
+          {renderInnerButton()}
         </Link>
-      : renderButton()
-    );
+      : <button
+      className={buttonClass}
+      onClick={onClick}>
+        {renderInnerButton()}
+      </button>
+  );
 };
+
+// Button.Member = ({ children }) => {
+//   return (
+//     <Button
+//     className="button-member"
+//     remove="custom-button">
+//       {children}
+//     </Button>
+//   );
+// }
+
+// Button.Group = ({ children, className }) => {
+//   return (
+//     <Container className="button-group">
+//       {children}
+//     </Container>
+//   );
+// }
 
 export default Button;
 

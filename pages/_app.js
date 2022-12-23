@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
       currentUrl,
       lastPage: lastPageRef.current
     }}>
-      <Container className="bg-gray-600">
+      <Container className="relative max-h-screen min-h-screen overflow-y-auto bg-gray-600 max-w-screen min-w-screen">
         <LayoutController>
           <Component {...pageProps} />
         </LayoutController>

@@ -1,23 +1,19 @@
 
 
-const Title = ({ children }) => {
+import buildClassName from "../../lib/helpers/buildClassName";
+
+const Title = ({ className="", remove, children }) => {
   return (
-    <p>{children}</p>
+    <h2 
+    className={buildClassName({
+      base: "text-center",
+      extend: className,
+      remove})
+    }>
+      {children}
+    </h2>
   );
 };
 
-// Main page titles (h1)
-Title.Main = ({ children }) => {
-  return (
-    <h1>{children}</h1>
-  )
-}
-
-// Arbitrary main title
-Title.Primary = ({ children }) => {
-  return (
-    <h2>{children}</h2>
-  )
-}
 
 export default Title;
