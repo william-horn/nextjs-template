@@ -33,7 +33,7 @@ const pageConfig = {
     renderedName: "Home",
     id: "home",
     url: "/",
-    layout: {}
+    layout: { name: Enum.LayoutNames.ExampleLayout.value }
   }),
   
   Example: new Page({

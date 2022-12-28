@@ -2,6 +2,8 @@
 import Container from '../../Container';
 import React from 'react';
 import Text from '../../typography/Text';
+import Header from './Header';
+import Footer from './Footer';
 import { useAppContext } from '../../../providers/AppProvider';
 
 const ExampleLayout = ({ children }) => {
@@ -9,8 +11,17 @@ const ExampleLayout = ({ children }) => {
 
   return (
     <Container className="example-layout">
-      <Text>Layout!</Text>
-      {children}
+      <Header>
+        <Header.Title>Example Title</Header.Title>
+      </Header>
+
+      <Container className="layout-body">
+        {children}
+      </Container>
+
+      <Footer>
+        <Footer.Title>Example Footer</Footer.Title>
+      </Footer>
     </Container>
   );
 };

@@ -1,3 +1,4 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 import Button from '../components/buttons/Button';
@@ -26,7 +27,7 @@ export default function Home() {
   }
   
   return (
-    <Container className="bg-blue-500 page h-[500vh]">
+    <Container className="bg-blue-500 page h-[200vh]">
       <Container className="w-[50%] mx-auto flex flex-col items-center bg-gray-500 h-full">
         <Title className="my-4 text-2xl">Example of icons mixed in text</Title>
 
@@ -40,6 +41,7 @@ export default function Home() {
         </Container>
 
         <Title className="my-4 text-2xl">Example of buttons</Title>
+      
 
         <Button
         leftIcon={Icons.ArrowLeftIcon} 
@@ -58,7 +60,11 @@ export default function Home() {
 
         <Button>Just an ordinary button</Button>
 
-        <Button>Just an ordinary button but lets see how responsive it is when crunched down</Button>
+        <Button onClick={() => {
+          console.log('button was clicked');
+        }}>
+          Just an ordinary button but lets see how responsive it is when crunched down
+        </Button>
 
 
         <Title className="my-4 text-2xl">Sticky elements example</Title>
