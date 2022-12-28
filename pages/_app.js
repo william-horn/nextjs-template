@@ -6,7 +6,7 @@ import Container from '../components/Container';
 
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import { findPageByUrl } from './page.config';
+import { findPageByUrl } from '../config/page.config';
 
 if (typeof window !== 'undefined') {
   const allEl = window.document.querySelector("body");
