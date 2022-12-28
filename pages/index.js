@@ -60,10 +60,28 @@ export default function Home() {
 
         <Button>Just an ordinary button</Button>
 
-        <Button onClick={() => {
-          console.log('button was clicked');
+        <Button onClick={async () => {
+          const res = await fetch('/api/test');
+          const data = await res.json();
+
+          console.log('got back from get: ', data);
         }}>
-          Just an ordinary button but lets see how responsive it is when crunched down
+          Get API Data
+        </Button>
+
+        <Button onClick={async () => {
+          const res = await fetch('/api/test', {
+            method: 'POST',
+            body: JSON.stringify({ name: 'Frank' }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          const data = await res.json();
+
+          console.log('got back from post: ', data);
+        }}>
+          Post API Data
         </Button>
 
 
