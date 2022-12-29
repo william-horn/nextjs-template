@@ -9,11 +9,16 @@ async function dbConnect() {
   }
 
   mongoose.set('strictQuery', false);
+  const DEV = process.env.NODE_ENV === 'development';
+
+  console.log('environment mode: ', process.env.NODE_ENV);
+  console.log('mongo running in dev mode: ', DEV);
+  console.log('mongo uri: ', process.env.MONGODB_URI);
   
   const db = await mongoose.connect(
-    process.env.NODE_ENV === 'development' 
+    (DEV
       ? 'mongodb://localhost/test'
-      : process.env.MONGODB_URI, 
+      : process.env.MONGODB_URI), 
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
