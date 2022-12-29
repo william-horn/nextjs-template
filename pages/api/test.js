@@ -7,6 +7,7 @@ dbConnect();
 export default async function handler(req, res) {
   const { method } = req;
   res.setHeader('Allow', ['GET', 'POST']);
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   try {
 
