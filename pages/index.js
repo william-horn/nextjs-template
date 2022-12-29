@@ -9,10 +9,18 @@ import Searchbar from '../components/Searchbar';
 import IconImage from '../components/IconImage';
 import Link from 'next/link';
 import Icons from '../public/icons';
-
 import Enum from '../enum';
 import useLocalStorageState from '../hooks/useLocalStorageState'
 import IconText from '../components/typography/IconText';
+
+/*
+  > TESTING MONGODB CONNECTION
+*/
+
+
+/*
+  < TESTING MONGODB CONNECTION
+*/
 
 export default function Home() {
   const [testLocalStorage, setTestLocalStorage] = useLocalStorageState('test_key', 'initial_value');
@@ -72,7 +80,11 @@ export default function Home() {
         <Button onClick={async () => {
           const res = await fetch('/api/test', {
             method: 'POST',
-            body: JSON.stringify({ name: 'Frank' }),
+            body: JSON.stringify({ 
+              username: 'Frank',
+              password: 'some password',
+              email: 'frank@frank.com' 
+            }),
             headers: {
               'Content-Type': 'application/json'
             }
