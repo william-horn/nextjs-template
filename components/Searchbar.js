@@ -49,6 +49,7 @@ const SearchBar = ({
   }
 
   // Window events for detecting when using is unfocusing the search bar
+  // todo: centralize this logic in the top level component, and pass a callback to handle this instead of making a new event listener
   useEffect(() => {
     window.addEventListener('mousedown', onSearchUnfocus);
     window.addEventListener('blur', unfocusSearch);

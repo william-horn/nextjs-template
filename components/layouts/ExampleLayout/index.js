@@ -12,7 +12,7 @@ const ExampleLayout = ({ children }) => {
   return (
     <Container className="example-layout">
       <Header>
-        <Header.Title>Example Title</Header.Title>
+        <Header.Title>Example Header</Header.Title>
       </Header>
 
       <Container className="layout-body">

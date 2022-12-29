@@ -69,7 +69,12 @@ export default function Home() {
         <Button>Just an ordinary button</Button>
 
         <Button onClick={async () => {
-          const res = await fetch('/api/test');
+          const res = await fetch('/api/test', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
           const data = await res.json();
 
           console.log('got back from get: ', data);
