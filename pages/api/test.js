@@ -6,6 +6,7 @@ dbConnect();
 
 export default async function handler(req, res) {
   const { method } = req;
+  res.setHeader('Allow', ['GET', 'POST']);
 
   try {
 
