@@ -75,7 +75,6 @@ export default function Home() {
               'Content-Type': 'application/json'
             }
           });
-          console.log('response: ', res);
           const data = await res.json();
 
           console.log('got back from get: ', data);
@@ -95,7 +94,6 @@ export default function Home() {
               'Content-Type': 'application/json'
             }
           });
-          console.log('response: ', res);
           const data = await res.json();
 
           console.log('got back from post: ', data);
