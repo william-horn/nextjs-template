@@ -3,10 +3,17 @@ import mongoose from "mongoose";
 
 const connection = {};
 
+console.log("INITIALIZING MONGO CONNECT FILE");
+
 async function dbConnect() {
+  console.log("FIRST TIME RUNNING CONNECTION");
+
   if (connection.isConnected) {
+    console.log("ALREADY CONNECTED");
     return;
   }
+
+  console.log("RUNNING FIRST TIME CONNECTION");
 
   mongoose.set('strictQuery', false);
   const DEV = process.env.NODE_ENV === 'development';
