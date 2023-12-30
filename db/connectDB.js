@@ -13,6 +13,7 @@ async function dbConnect() {
 
   console.log('environment mode: ', process.env.NODE_ENV);
   console.log('mongo running in dev mode: ', DEV);
+  console.log('mondo uri: ', process.env.MONGODB_URI);
   
   const db = await mongoose.connect(
     (DEV
